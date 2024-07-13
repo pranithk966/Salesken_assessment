@@ -9,7 +9,7 @@ const SearchBar = ({ onSearch }) => {
   }
 
   return (
-    <div className="flex items-center justify-center h-full w-[400px]">
+    <div className="flex items-center justify-center h-full w-[500px]">
       {' '}
       {/* Use flexbox to center */}
       <div className="flex items-center max-w-md mx-auto rounded-lg w-full ">
@@ -25,7 +25,7 @@ const SearchBar = ({ onSearch }) => {
         <div>
           <button
             type="button"
-            className="flex items-center bg-blue-500 justify-center text-white rounded-full w-[30px] h-[30px] ml-2">
+            className="flex items-center bg-blue-500 justify-center text-white rounded-full w-[40px] h-[40px] ml-2">
             <svg
               className="w-5 h-5"
               fill="none"

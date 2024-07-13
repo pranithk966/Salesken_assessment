@@ -5,7 +5,7 @@ import { Tilt } from 'react-tilt'
 import Pagination from './Pagination'
 import { Link } from 'react-router-dom'
 
-export default function Card({ searchQuery }) {
+export default function Card({ searchQuery, filters }) {
   const data = useSelector((state) => state.data.data)
   const status = useSelector((state) => state.data.status)
   const error = useSelector((state) => state.data.error)
@@ -33,9 +33,18 @@ export default function Card({ searchQuery }) {
     }
   }, [status, dispatch])
 
-  const filteredData = data.filter((item) =>
-    item.mission_name.toLowerCase().includes(searchQuery.toLowerCase())
-  )
+  const filteredData = data.filter((item) => {
+    const matchesSearchQuery = item.mission_name
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase())
+    const matchesStatus = filters.status
+      ? item.launch_success === (filters.status === 'Success')
+      : true
+    const matchesYear = filters.year
+      ? item.launch_year === filters.year.toString()
+      : true
+    return matchesSearchQuery && matchesStatus && matchesYear
+  })
 
   const totalPages = Math.ceil(filteredData.length / itemsPerPage)
 
@@ -59,15 +68,15 @@ export default function Card({ searchQuery }) {
             <Tilt
               key={item.mission_name}
               options={defaultOptions}
-              className="hover:bg-gray-100 transition duration-75 ease-in-out group">
+              className="group hover:bg-gradient-to-r from-red-100 to-gray-400 transition duration-75 ease-in-out group">
               <div className="shadow-lg px-[20px] py-[30px] ">
                 <div className="flex place-content-center h-[200px]">
                   <img src={item.links.mission_patch} alt="broken" />
                 </div>
 
-                <div>
+                <div className="mt-[20px] font-semibold group-hover:font-bold group-hover:text-white">
                   <h1>Mission: {item.mission_name}</h1>
-                  <h1>Launch Date: {item.launch_date_local}</h1>
+                  <h1>Launch Date: {item.launch_date_local.slice(0, 4)}</h1>
                   <h1>Rocket: {item.rocket.rocket_name}</h1>
                   <h1>Launch Site: {item.launch_site.site_name}</h1>
                 </div>

@@ -37,8 +37,10 @@ const Login = ({ onLogin }) => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <form onSubmit={handleSubmit} className="p-8 bg-white shadow-md rounded">
-        <h2 className="text-2xl mb-4">Login</h2>
+      <form
+        onSubmit={handleSubmit}
+        className="p-8 bg-white shadow-md rounded w-[60%]">
+        <h2 className="text-2xl mb-4">Sign Up</h2>
         <div className="mb-4">
           <label className="block mb-1">Username</label>
           <input
@@ -46,6 +48,7 @@ const Login = ({ onLogin }) => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             className="w-full px-4 py-2 border rounded"
+            placeholder="example@example.com"
           />
           {errors.username && (
             <p className="text-red-500 text-sm mt-1">{errors.username}</p>
@@ -54,6 +57,7 @@ const Login = ({ onLogin }) => {
         <div className="mb-4">
           <label className="block mb-1">Password</label>
           <input
+            placeholder="abc"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -66,7 +70,7 @@ const Login = ({ onLogin }) => {
         <button
           type="submit"
           className="w-full px-4 py-2 bg-blue-500 text-white rounded">
-          Login
+          Signup
         </button>
       </form>
     </div>
